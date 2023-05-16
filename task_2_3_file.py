@@ -44,10 +44,16 @@ def get_input(string_f, user_input):
                 num_of_closed += 1
             if user_input[i] in operators or is_number(user_input[i]) or user_input[i] == '.':
                 if is_last_space:
+                    if user_input[i] == '.':
+                        print("ERROR: '.' AT THE START OF INPUT")
+                        return 'error'
                     string_f.push(user_input[i])
                     is_last_space = False
                 else:
-                    string_f.stack[j] += user_input[i]
+                    if string_f.top_in >= j:
+                        string_f.stack[j] += user_input[i]
+                    else:
+                        string_f.push(user_input[i])
         else:
             is_last_space = True
             j += 1
